@@ -1,17 +1,21 @@
 import sys
 import random
+from random import shuffle
 
 class Photo:
-    def __init__(self,id,orientation,tags_no,tags):
-        self.id = id
+    def __init__(self,ids,orientation,tags_no,tags):
+        self.ids = ids
         self.tags = tags
         self.o = orientation
         self.tags_no = tags_no
 
-class Slide:
-    def __init__(self,photos)
-        self.photos = photos
+    def __str__(self):
+        return str(self.ids)
+    __repr__ = __str__
 
+class Slide:
+    def __init__(self,photos):
+        self.photos = photos
 
 
 def make_sets(photo1,photo2):
@@ -39,7 +43,7 @@ def group_by_orientation(photos):
     for photo in photos:
         if(photo.o == 'H'):
             horizontals.append(photo)
-        else:
+        if(photo.o == 'V'):
             verticals.append(photo)
     
     return horizontals,verticals
@@ -47,14 +51,17 @@ def group_by_orientation(photos):
 def randomize_slides(horizontals, verticals):
     slides = []
     for i in range(len(verticals)):
+        if(len(verticals) == 0 or len(verticals) == 1):
+            break
         rand1 = random.randint(0,len(verticals) - 1)
         photo1 = verticals[rand1]
-        verticals.remove(rand1)
+        verticals.remove(verticals[rand1])
         rand2 = random.randint(0,len(verticals) - 1)
-        photo2 = verticals[rand1]
-        verticals.remove(rand2)
+        photo2 = verticals[rand2]
+        verticals.remove(verticals[rand2])
         slides.append(Slide([photo1,photo2]))
     
+
     for i in range(len(horizontals)):
         slides.append(Slide([horizontals[i]]))
     
@@ -63,9 +70,19 @@ def randomize_slides(horizontals, verticals):
 
 def make_output(slides):
     shuffle(slides)
-    
+    print(len(slides))
+    for slide in slides:
+        if(len(slide.photos) == 2):
+            print(slide.photos[0],slide.photos[1])
+        else:
+            print(slide.photos[0])
 
 if __name__== "__main__":
     photos = parse()
-    horizontals = group_by_orientation(photos)[0]
-    verticals = group_by_orientation(photos)[1]
+    horizontals,verticals = group_by_orientation(photos)
+    # print(tuple8_of_photos)
+    slides = randomize_slides(horizontals.copy(),verticals.copy())
+    # print(photos)
+    # print(horizontals)
+    # print(verticals)
+    make_output(slides)

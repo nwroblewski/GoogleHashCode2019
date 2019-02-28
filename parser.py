@@ -8,6 +8,9 @@ class Photo:
         self.o = orientation
         self.tags_no = tags_no
 
+# class Slideshow:
+    
+
 def parse():
     photos = []
     dataset = open(sys.argv[1],'r')
@@ -18,5 +21,15 @@ def parse():
         photos.append(Photo(i,line[0],line[1],line[2:len(line)]))
     return photos
 
+def group_by_orientation(photos):
+    horizontals = [] 
+    verticals = []
+    for photo in photos:
+        if(photo.o == 'H'):
+            horizontals.append(photo)
+        else:
+            verticals.append(photo)
+
 if __name__== "__main__":
     photos = parse()
+    
