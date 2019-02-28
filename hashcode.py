@@ -1,5 +1,5 @@
 import sys
-
+import random
 
 class Photo:
     def __init__(self,id,orientation,tags_no,tags):
@@ -9,11 +9,9 @@ class Photo:
         self.tags_no = tags_no
 
 class Slide:
-    def __init__(self,photo1,photo2)
-        self.photo1 = photo1
-        self.photo2 = photo2
+    def __init__(self,photos)
+        self.photos = photos
 
-def calculate_interest(slide1,slide2):
 
 
 def make_sets(photo1,photo2):
@@ -46,8 +44,27 @@ def group_by_orientation(photos):
     
     return horizontals,verticals
 
-def make_output(slides):
+def randomize_slides(horizontals, verticals):
+    slides = []
+    for i in range(len(verticals)):
+        rand1 = random.randint(0,len(verticals) - 1)
+        photo1 = verticals[rand1]
+        verticals.remove(rand1)
+        rand2 = random.randint(0,len(verticals) - 1)
+        photo2 = verticals[rand1]
+        verticals.remove(rand2)
+        slides.append(Slide([photo1,photo2]))
     
+    for i in range(len(horizontals)):
+        slides.append(Slide([horizontals[i]]))
+    
+    return slides
+
+
+def make_output(slides):
+    shuffle(slides)
+    
+
 if __name__== "__main__":
     photos = parse()
     horizontals = group_by_orientation(photos)[0]
