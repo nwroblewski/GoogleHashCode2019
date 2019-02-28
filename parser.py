@@ -1,3 +1,4 @@
+#! /usr/local/bin/python3.6
 import sys
 
 
@@ -18,5 +19,8 @@ def parse():
         photos.append(Photo(i,line[0],line[1],line[2:len(line)]))
     return photos
 
-if __name__== "__main__":
+def main():
     photos = parse()
+
+if __name__== "__main__":
+    main()
