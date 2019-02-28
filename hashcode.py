@@ -8,10 +8,15 @@ class Photo:
         self.o = orientation
         self.tags_no = tags_no
 
-# class Slideshow:
+class Slide:
+    def __init__(self,photo1,photo2)
+        self.photo1 = photo1
+        self.photo2 = photo2
+
+def calculate_interest(slide1,slide2):
 
 
-def sets(photo1,photo2):
+def make_sets(photo1,photo2):
     
     intersection_list = list(set(photo1.tags).intersection(photo2.tags))
     photo1_ex = [i for i in photo1.tags if i not in intersection_list or intersection_list.remove(i)]
@@ -39,8 +44,11 @@ def group_by_orientation(photos):
         else:
             verticals.append(photo)
     
-    return
+    return horizontals,verticals
 
+def make_output(slides):
+    
 if __name__== "__main__":
     photos = parse()
-    
+    horizontals = group_by_orientation(photos)[0]
+    verticals = group_by_orientation(photos)[1]
