@@ -19,8 +19,11 @@ def parse():
         photos.append(Photo(i,line[0],line[1],line[2:len(line)]))
     return photos
 
+
+
 def main():
     photos = parse()
+
 
 if __name__== "__main__":
     main()
